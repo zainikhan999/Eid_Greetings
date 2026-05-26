@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Greeting Card Generator 🌙</title>
+    <meta name="description" content="Create and share beautiful personalized Eid-ul-Adha & Bakra Eid greeting cards in English and Urdu. Mobile-friendly, instant sharing via WhatsApp!">
+    <meta property="og:title" content="Eid Mubarak Card Generator">
+    <meta name="theme-color" content="#064e3b">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Great+Vibes&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-emerald">
+
+<div class="app-wrapper">
+
+    <!-- HEADER -->
+    <header class="app-header">
+        <div class="header-logo">
+            <i class="fa-solid fa-moon logo-icon"></i>
+            <h1>Eid Card Maker</h1>
+        </div>
+        <p class="header-subtitle">Create & share personalized Eid greetings ✨</p>
+    </header>
+
+    <!-- ===== CREATOR VIEW ===== -->
+    <div id="creator-view">
+        <div class="creator-layout">
+
+            <!-- LEFT: Wizard Form -->
+            <div class="wizard-panel">
+
+                <!-- Step Progress Bar -->
+                <div class="step-progress">
+                    <div class="step-track">
+                        <div class="step-dot active" data-step="1">
+                            <span class="dot-number">1</span>
+                            <span class="dot-label">Language</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-dot" data-step="2">
+                            <span class="dot-number">2</span>
+                            <span class="dot-label">Names</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-dot" data-step="3">
+                            <span class="dot-number">3</span>
+                            <span class="dot-label">Message</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-dot" data-step="4">
+                            <span class="dot-number">4</span>
+                            <span class="dot-label">Style</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 1: Language -->
+                <div class="step-panel active" id="step-1">
+                    <h2 class="step-title"><i class="fa-solid fa-language"></i> Choose Language</h2>
+                    <p class="step-subtitle">What language should your greeting be in?</p>
+                    <div class="lang-choice-grid">
+                        <button class="lang-choice-btn active" data-lang="en">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                            <span class="lang-script">Eid Mubarak</span>
+                        </button>
+                        <button class="lang-choice-btn" data-lang="ur">
+                            <span class="lang-flag">🇵🇰</span>
+                            <span class="lang-name">اردو</span>
+                            <span class="lang-script">عید مبارک</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Names -->
+                <div class="step-panel" id="step-2">
+                    <h2 class="step-title"><i class="fa-solid fa-user-pen"></i> Personalize</h2>
+                    <p class="step-subtitle">Names are optional — leave blank for a general card.</p>
+                    <div class="name-fields">
+                        <div class="form-group">
+                            <label id="label-to" for="to-name">To (Recipient)</label>
+                            <div class="input-with-icon">
+                                <i class="fa-solid fa-heart input-icon"></i>
+                                <input type="text" id="to-name" placeholder="e.g. Zara" maxlength="30" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label id="label-from" for="from-name">From (Your Name)</label>
+                            <div class="input-with-icon">
+                                <i class="fa-solid fa-pen input-icon"></i>
+                                <input type="text" id="from-name" placeholder="e.g. Ahmed" maxlength="30" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Template Message -->
+                <div class="step-panel" id="step-3">
+                    <h2 class="step-title"><i class="fa-solid fa-scroll"></i> Choose Wish</h2>
+                    <p class="step-subtitle">Pick a ready-made wish or write your own below.</p>
+                    <div class="template-scroll-list" id="wishes-templates-container">
+                        <!-- Dynamically injected -->
+                    </div>
+                    <div class="custom-msg-area">
+                        <div class="custom-msg-header">
+                            <label for="card-message">✏️ Edit Message</label>
+                            <span class="char-count"><span id="chars-used">0</span>/220</span>
+                        </div>
+                        <textarea id="card-message" rows="3" placeholder="Select a wish above or write your own..."></textarea>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Theme & Style -->
+                <div class="step-panel" id="step-4">
+                    <h2 class="step-title"><i class="fa-solid fa-palette"></i> Card Design</h2>
+                    <p class="step-subtitle">Pick a color theme and card frame style.</p>
+
+                    <div class="design-section">
+                        <p class="design-section-label">🎨 Color Theme</p>
+                        <div class="theme-choice-grid">
+                            <button class="theme-choice-btn active" data-theme="emerald">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #064e3b, #047857);"></span>
+                                <span>Emerald</span>
+                            </button>
+                            <button class="theme-choice-btn" data-theme="midnight">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #1e1b4b, #3730a3);"></span>
+                                <span>Midnight</span>
+                            </button>
+                            <button class="theme-choice-btn" data-theme="rose">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #881337, #be185d);"></span>
+                                <span>Rose</span>
+                            </button>
+                            <button class="theme-choice-btn" data-theme="sunset">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #c2410c, #d97706);"></span>
+                                <span>Sunset</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="design-section">
+                        <p class="design-section-label">🖼️ Card Frame Style</p>
+                        <div class="style-choice-grid">
+                            <button class="style-choice-btn active" data-style="royal-arch">
+                                <i class="fa-solid fa-mosque"></i>
+                                <span>Royal Arch</span>
+                            </button>
+                            <button class="style-choice-btn" data-style="floral-arabesque">
+                                <i class="fa-solid fa-seedling"></i>
+                                <span>Floral</span>
+                            </button>
+                            <button class="style-choice-btn" data-style="festive-qurbani">
+                                <span class="emoji-icon">🐑</span>
+                                <span>Qurbani</span>
+                            </button>
+                            <button class="style-choice-btn" data-style="modern-minimalist">
+                                <i class="fa-solid fa-square"></i>
+                                <span>Minimal</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wizard Navigation Buttons -->
+                <div class="wizard-nav">
+                    <button class="nav-btn prev-btn" id="prev-btn" style="visibility: hidden;">
+                        <i class="fa-solid fa-chevron-left"></i> Back
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn">
+                        Next <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                    <button class="nav-btn launch-btn" id="launch-card-btn" style="display:none;">
+                        <i class="fa-solid fa-paper-plane"></i> View Card
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: Live Card Preview -->
+            <div class="preview-panel">
+                <div class="sticky-preview">
+                    <p class="preview-label"><i class="fa-solid fa-eye"></i> Live Preview</p>
+                    <div class="card-frame" id="live-card-container">
+                        <div class="card-paper">
+                            <div class="card-decor-border"></div>
+                            <div class="card-corner tl"></div>
+                            <div class="card-corner tr"></div>
+                            <div class="card-corner bl"></div>
+                            <div class="card-corner br"></div>
+                            <div class="card-inner">
+                                <div class="card-ornament-top" id="preview-ornament-top">
+                                    <i class="fa-solid fa-star-and-crescent" style="font-size: 22px; color: var(--theme-accent);"></i>
+                                </div>
+                                <div class="card-to" id="preview-recipient"></div>
+                                <div class="card-title" id="preview-title">Eid Mubarak</div>
+                                <p class="card-body" id="preview-body">May this blessed Eid bring you joy, love, and happiness!</p>
+                                <div class="card-from" id="preview-sender"></div>
+                                <div class="card-ornament-bottom" id="preview-ornament-bottom">
+                                    <span class="g-dot"></span><span class="g-line"></span><span class="g-dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== SHOWCASE VIEW ===== -->
+    <div id="showcase-view" class="view-hidden">
+        <div class="showcase-container">
+
+            <div class="showcase-card-wrapper" id="showcase-card-target">
+                <div class="card-paper">
+                    <div class="card-decor-border"></div>
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    <div class="card-inner">
+                        <div class="card-ornament-top" id="showcase-ornament-top">
+                            <i class="fa-solid fa-star-and-crescent" style="font-size: 26px; color: var(--theme-accent);"></i>
+                        </div>
+                        <div class="card-to" id="showcase-recipient"></div>
+                        <div class="card-title" id="showcase-title">Eid Mubarak</div>
+                        <p class="card-body" id="showcase-body">May this blessed Eid bring you joy, love, and happiness!</p>
+                        <div class="card-from" id="showcase-sender"></div>
+                        <div class="card-ornament-bottom" id="showcase-ornament-bottom">
+                            <span class="g-dot"></span><span class="g-line"></span><span class="g-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions Toolbar -->
+            <div class="showcase-actions">
+                <button class="action-btn wa" id="share-whatsapp-btn">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="action-btn copy" id="copy-link-btn">
+                    <i class="fa-solid fa-link"></i> Copy Link
+                </button>
+                <button class="action-btn dl" id="download-card-btn">
+                    <i class="fa-solid fa-download"></i> Save Image
+                </button>
+                <button class="action-btn edit" id="edit-card-btn">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit Card
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Toast -->
+<div id="toast-pop"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
