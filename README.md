@@ -18,7 +18,7 @@ Fully tailored for both English and Urdu audiences.
 *   **Native Typography:** Uses beautiful, authentic Google Fonts like `Noto Nastaliq Urdu` for Urdu scripts and `Great Vibes` & `Playfair Display` for English aesthetics.
 
 ### 3. 🐑 Eid-ul-Adha Specific Templates
-Instead of generic greetings, the app features **30 pre-written wish templates** deeply focused on Bakra Eid, Qurbani, Hajj, and sacrifice — decorated with beautiful themed icons (🐑 🌙 🕌 🕋).
+Instead of generic greetings, the app features **30 pre-written wish templates** deeply focused on Eid-ul-Adha, Hajj, and the spirit of devotion — decorated with beautiful themed icons (🐑 🌙 🕌 🕋).
 
 ### 4. 🎨 Premium Dynamic Aesthetics
 Choose from an array of premium styles to create a truly personalized card:

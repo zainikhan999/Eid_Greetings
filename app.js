@@ -3,40 +3,40 @@ document.addEventListener("DOMContentLoaded", () => {
     const state = { toName:"", fromName:"", lang:"en", theme:"emerald", cardStyle:"royal-arch", message:"", currentStep:1 };
     const TOTAL_STEPS = 4;
 
-    // === TEMPLATES with Bakra Eid icons ===
+    // === TEMPLATES with Eid-ul-Adha icons ===
     const T = {
         en: [
-            { icon:"🐑", text:"May the spirit of Qurbani fill your heart with devotion. May Allah accept all your sacrifices. Eid-ul-Adha Mubarak!" },
-            { icon:"🌙", text:"Wishing you a blessed Bakra Eid filled with Hajj blessings, peace, and beautiful moments of sharing." },
+            { icon:"🐑", text:"May the spirit of devotion fill your heart with peace. May Allah accept all your good deeds. Eid-ul-Adha Mubarak!" },
+            { icon:"🌙", text:"Wishing you a blessed Eid-ul-Adha filled with Hajj blessings, peace, and beautiful moments of sharing." },
             { icon:"🐐", text:"Eid Mubarak! May the faith of Prophet Ibrahim inspire your heart with peace and conviction always." },
-            { icon:"🕌", text:"May the blessings of Hajj, the joy of Qurbani, and the warmth of family make this Eid deeply memorable!" },
-            { icon:"✨", text:"On this day of sacrifice, may Allah answer your deepest prayers, forgive your shortcomings, and guide you always." },
-            { icon:"🐑", text:"Wishing you a joyful Bakra Eid! May your days be filled with delicious feasts and spiritual joy." },
+            { icon:"🕌", text:"May the blessings of Hajj, the joy of this blessed day, and the warmth of family make this Eid deeply memorable!" },
+            { icon:"✨", text:"On this day of devotion, may Allah answer your deepest prayers, forgive your shortcomings, and guide you always." },
+            { icon:"🐑", text:"Wishing you a joyful Eid-ul-Adha! May your days be filled with delicious feasts and spiritual joy." },
             { icon:"🌟", text:"May divine grace shine upon your home and bless you with infinite health, happiness, and peace. Eid Mubarak!" },
             { icon:"🐐", text:"Eid-ul-Adha Mubarak! Sending warm thoughts and heartfelt wishes to you and your beautiful family." },
-            { icon:"🎉", text:"Let us celebrate this Eid of sacrifice with gratitude, sharing our blessings with everyone around. Happy Eid!" },
+            { icon:"🎉", text:"Let us celebrate this Eid of devotion with gratitude, sharing our blessings with everyone around. Happy Eid!" },
             { icon:"🕋", text:"May this Eid bring you closer to Allah, fill your life with blessings, and grant you eternal happiness." },
             { icon:"🕊️", text:"Eid Mubarak! May the teachings of this holy day bring eternal peace and prosperity to your beautiful family." },
-            { icon:"🍖", text:"Happy Bakra Eid! May your day be filled with delicious food, hearty laughs, and endless blessings." },
-            { icon:"💖", text:"Sending you warm wishes on Eid-ul-Adha. May your sacrifices be rewarded with immense happiness." },
+            { icon:"🍖", text:"Happy Eid-ul-Adha! May your day be filled with delicious food, hearty laughs, and endless blessings." },
+            { icon:"💖", text:"Sending you warm wishes on Eid-ul-Adha. May your devotion be rewarded with immense happiness." },
             { icon:"🤲", text:"May Allah's divine light guide you on the path of righteousness. Have a blessed and joyous Eid-ul-Adha!" },
-            { icon:"🎊", text:"Eid Mubarak! Let the joy of sharing and the spirit of sacrifice illuminate your heart today and always." }
+            { icon:"🎊", text:"Eid Mubarak! Let the joy of sharing and the spirit of devotion illuminate your heart today and always." }
         ],
         ur: [
-            { icon:"🐑", text:"عید الاضحیٰ مبارک! اللہ پاک آپ کی قربانی اور عبادات کو قبول فرمائے اور آپ کو خوشیوں سے نوازے۔" },
-            { icon:"🌙", text:"سنتِ ابراہیمی کا ایثار اور قربانی کی روایت۔ اللہ رب العزت آپ کو حجِ مبرور کی برکات نصیب فرمائے۔" },
-            { icon:"🐐", text:"قربانی کی مٹھاس، اپنوں کا ایثار، اور سنتِ ابراہیمی کا جذبہ۔ آپ کو بکرا عید بہت بہت مبارک ہو!" },
+            { icon:"🐑", text:"عید الاضحیٰ مبارک! اللہ پاک آپ کی عبادات اور دعاؤں کو قبول فرمائے اور آپ کو خوشیوں سے نوازے۔" },
+            { icon:"🌙", text:"سنتِ ابراہیمی کا ایثار اور طاعت کی روایت۔ اللہ رب العزت آپ کو حجِ مبرور کی برکات نصیب فرمائے۔" },
+            { icon:"🐐", text:"عید کی مٹھاس، اپنوں کا ایثار، اور سنتِ ابراہیمی کا جذبہ۔ آپ کو عید الاضحیٰ بہت بہت مبارک ہو!" },
             { icon:"🕌", text:"اللہ تعالیٰ آپ کو اور آپ کے خاندان کو صحتِ کاملہ اور عید الاضحیٰ کی سچی مسرتیں عطا فرمائے۔ عید مبارک!" },
-            { icon:"✨", text:"اس عیدِ قرباں پر دعا ہے کہ اللہ پاک آپ کی تمام دلی مرادیں پوری کرے اور آپ کو ہمیشہ خوش رکھے۔" },
-            { icon:"🐑", text:"بکرا عید کی لذیذ ضیافتیں اور اپنوں کی پیاری محفلیں آپ کے لیے مبارک ہوں۔ عید الاضحیٰ مبارک!" },
+            { icon:"✨", text:"اس مبارک دن پر دعا ہے کہ اللہ پاک آپ کی تمام دلی مرادیں پوری کرے اور آپ کو ہمیشہ خوش رکھے۔" },
+            { icon:"🐑", text:"عید الاضحیٰ کی لذیذ ضیافتیں اور اپنوں کی پیاری محفلیں آپ کے لیے مبارک ہوں۔ عید الاضحیٰ مبارک!" },
             { icon:"🌟", text:"عید مبارک! خدا کرے کہ آپ کی زندگی سنتِ ابراہیمی کے ایثار کی طرح روشن اور بابرکت ہو۔" },
-            { icon:"🐐", text:"دل کی گہرائیوں سے آپ کو عیدِ قرباں مبارک! یہ دن آپ کے لیے بے شمار برکات کا باعث بنے۔" },
-            { icon:"🕋", text:"قربانی کا سچا جذبہ اور ایثار کی لازوال داستان۔ عید الاضحیٰ کی مبارک گھڑیوں میں دلی مبارکباد!" },
-            { icon:"🎉", text:"عید الاضحیٰ کے پرمسرت موقع پر دعا ہے کہ اللہ آپ کی قربانیوں کو قبول فرمائے اور زندگی میں بہار لائے۔" },
+            { icon:"🐐", text:"دل کی گہرائیوں سے آپ کو عید الاضحیٰ مبارک! یہ دن آپ کے لیے بے شمار برکات کا باعث بنے۔" },
+            { icon:"🕋", text:"ایثار کا سچا جذبہ اور طاعت کی لازوال داستان۔ عید الاضحیٰ کی مبارک گھڑیوں میں دلی مبارکباد!" },
+            { icon:"🎉", text:"عید الاضحیٰ کے پرمسرت موقع پر دعا ہے کہ اللہ آپ کے نیک اعمال کو قبول فرمائے اور زندگی میں بہار لائے۔" },
             { icon:"🕊️", text:"عید مبارک! اللہ کرے یہ مبارک دن آپ کے گھر میں امن، سکون اور بے شمار خوشیاں لے کر آئے۔" },
-            { icon:"🍖", text:"بکرا عید کی خوشیاں مبارک! اللہ آپ کے دسترخوان کو ہمیشہ وسیع رکھے اور خوشیاں عطا فرمائے۔" },
-            { icon:"💖", text:"دلی دعاؤں کے ساتھ عید الاضحیٰ مبارک! آپ کی ہر قربانی اللہ کی بارگاہ میں شرفِ قبولیت پائے۔" },
-            { icon:"🤲", text:"اللہ کی رحمتوں کا سایہ ہمیشہ آپ پر رہے۔ آپ کو اور آپ کے اہلِ خانہ کو عیدِ قرباں مبارک!" },
+            { icon:"🍖", text:"عید الاضحیٰ کی خوشیاں مبارک! اللہ آپ کے دسترخوان کو ہمیشہ وسیع رکھے اور خوشیاں عطا فرمائے۔" },
+            { icon:"💖", text:"دلی دعاؤں کے ساتھ عید الاضحیٰ مبارک! آپ کی ہر دعا اللہ کی بارگاہ میں شرفِ قبولیت پائے۔" },
+            { icon:"🤲", text:"اللہ کی رحمتوں کا سایہ ہمیشہ آپ پر رہے۔ آپ کو اور آپ کے اہلِ خانہ کو عید الاضحیٰ مبارک!" },
             { icon:"🎊", text:"عید کا دن خوشیاں بانٹنے اور محبتیں عام کرنے کا دن ہے۔ آپ سب کو دل کی اتھاہ گہرائیوں سے عید مبارک!" }
         ]
     };
